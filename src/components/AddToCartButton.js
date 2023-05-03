@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { GET_CART, ADD_TO_CART, GET_CART_TOTAL } from '../constants';
+import { ADD_TO_CART } from '../constants';
 
 const AddToCartButton = ({ productId }) => {
 	const [addToCart, { data, loading, error }] = useMutation(ADD_TO_CART);

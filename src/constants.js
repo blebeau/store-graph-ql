@@ -15,3 +15,16 @@ query getProducts {
   thumbnail }
   }
 `;
+
+export const GET_CART = gql`
+  query getCart {
+    cart {
+      total
+      products {
+        id
+        title
+        thumbnail
+      }
+    }
+  }
+`;

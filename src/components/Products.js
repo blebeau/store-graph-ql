@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { GET_PRODUCTS } from '../constants';
+import AddToCartButton from './AddToCartButton'
 
 const Products = () => {
 	const { loading, error, data } = useQuery(GET_PRODUCTS);
@@ -11,7 +12,8 @@ const Products = () => {
 		<div>
 			{data.products.map((product) => (
 				<div key={product.id} value={product.title}>
-					{product.title}
+					<span>{product.title}</span>
+					<AddToCartButton productId={product.id} />
 				</div>
 			))}
 		</div>
