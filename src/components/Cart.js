@@ -6,6 +6,7 @@ const Cart = () => {
 
 	if (loading) return 'Loading...';
 	if (error) return `Error! ${error.message}`;
+	if (data.cart === null) return 'No Products';
 
 	return (
 		<div>

@@ -8,6 +8,14 @@ mutation addToCart($productId: Int!) {
 }
 `;
 
+export const ADD_TO_STORE = gql`
+mutation addToStore($productName: String, $productName: String) {
+  addToStore(input: { productName: $productName, productName: $productName  }) {
+	total
+  }
+}
+`;
+
 export const GET_PRODUCTS = gql`
 query getProducts {
   products { id

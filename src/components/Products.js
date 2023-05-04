@@ -7,10 +7,12 @@ const Products = () => {
 
 	if (loading) return 'Loading...';
 	if (error) return `Error! ${error.message}`;
+	if (data.products === null) return 'No Products';
+
 
 	return (
 		<div>
-			{data.products.map((product) => (
+			{data && data.products.map((product) => (
 				<div key={product.id} value={product.title}>
 					<span>{product.title}</span>
 					<AddToCartButton productId={product.id} />

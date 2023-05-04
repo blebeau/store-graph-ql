@@ -3,8 +3,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_TO_CART } from '../constants';
 
 const AddToCartButton = ({ productId }) => {
-	const [addToCart, { data, loading, error }] = useMutation(ADD_TO_CART);
-	let input;
+	const [addToCart, { loading, error }] = useMutation(ADD_TO_CART);
 
 	if (loading) return 'Submitting...';
 	if (error) return `Submission error! ${error.message}`;
@@ -15,14 +14,8 @@ const AddToCartButton = ({ productId }) => {
 				onSubmit={e => {
 					e.preventDefault();
 					addToCart({ variables: { productId } });
-					input.value = '';
 				}}
 			>
-				<input
-					ref={node => {
-						input = node;
-					}}
-				/>
 				<button type="submit">Add To Cart</button>
 			</form>
 		</div>
