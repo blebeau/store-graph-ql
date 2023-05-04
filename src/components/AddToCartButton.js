@@ -9,7 +9,7 @@ const AddToCartButton = ({ productId }) => {
 	if (error) return `Submission error! ${error.message}`;
 
 	return (
-		<div>
+		<div style={{ paddingRight: '5px' }}>
 			<form
 				onSubmit={e => {
 					e.preventDefault();
