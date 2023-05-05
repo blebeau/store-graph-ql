@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_STORE } from '../constants';
+import { Button } from 'react-bootstrap';
 
 const AddProductToStore = () => {
 	const [addToStore, { loading, error }] = useMutation(ADD_TO_STORE);
@@ -25,10 +26,10 @@ const AddProductToStore = () => {
 				value={productDescription}
 				name='product description'
 			/>
-			<button onClick={e => {
+			<Button onClick={e => {
 				e.preventDefault();
 				submit()
-			}}>Add Product</button>
+			}}>Add Product</Button>
 		</div>
 	)
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa"
 import { useState } from "react";
+import { Button } from 'react-bootstrap';
 
 const navStyles = {
 	display: 'flex',
@@ -24,12 +25,12 @@ const Navigation = () => {
 				display: 'flex',
 				justifyContent: 'flex-end'
 			}}>
-				<button
+				<Button
 
 					onClick={() => setExpanded(!expanded)}
 				>
 					{expanded ? <FaLongArrowAltUp /> : <FaLongArrowAltDown />}
-				</button>
+				</Button>
 			</div>
 		</div>
 	)

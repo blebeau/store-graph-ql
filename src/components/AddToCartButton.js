@@ -1,6 +1,8 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_CART } from '../constants';
+import { Button } from 'react-bootstrap';
+
 
 const AddToCartButton = ({ productId }) => {
 	const [addToCart, { loading, error }] = useMutation(ADD_TO_CART);
@@ -16,7 +18,7 @@ const AddToCartButton = ({ productId }) => {
 					addToCart({ variables: { productId } });
 				}}
 			>
-				<button type="submit">Add To Cart</button>
+				<Button type="submit">Add To Cart</Button>
 			</form>
 		</div>
 	)
