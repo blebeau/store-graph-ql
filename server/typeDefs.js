@@ -24,6 +24,17 @@ const typeDefs = gql`
   input CartInput {
     productId: Int!
   }
+  input CategoryInput {
+    id: Int!
+    title: String!
+  }
+  input ProductInput {
+    id: Int!
+    title: String!
+    thumbnail: String!
+    price: Float
+    category: CategoryInput
+  }
   type Query {
     product: Product
     products(limit: Int): [Product]
@@ -34,6 +45,7 @@ const typeDefs = gql`
     addToCart(input: CartInput!): Cart
     completeCart: Cart
     loginUser(userName: String!, password: String!): User
+    addToStore(input: ProductInput!): Product
   }
 `;
 

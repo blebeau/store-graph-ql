@@ -103,6 +103,16 @@ const resolvers = {
 				'Please provide (valid) authentication details',
 			);
 		},
+		addToStore: async (_, { id, title, thumbnail, price, category }) => {
+			console.log('id, title, thumbnail, price, category',
+				id, title, thumbnail, price, category);
+
+			// cart = {
+			// 	products: [...cart.products, mockProduct(id)],
+			// };
+
+			// return cart;
+		}
 	},
 };
 

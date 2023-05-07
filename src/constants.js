@@ -9,9 +9,23 @@ mutation addToCart($productId: Int!) {
 `;
 
 export const ADD_TO_STORE = gql`
-mutation addToStore($productName: String, $productName: String) {
-  addToStore(input: { productName: $productName, productName: $productName  }) {
-	total
+mutation addToStore($id: Int!,
+  $title: String,
+  $thumbnail: String,
+  $price: Float, 
+  $category: String) {
+    addToStore(input: { 
+      id: $id,
+      title: $title,
+      thumbnail: $thumbnail, 
+      price: $price,
+      category: $category,
+    }) {
+      id
+      title
+      thumbnail
+      price
+      category
   }
 }
 `;
