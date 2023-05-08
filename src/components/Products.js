@@ -43,6 +43,7 @@ const Products = () => {
 					<span >{product.title}</span>
 					<AddToCartButton productId={product.id} />
 					<Button
+						variant='outline-primary'
 						style={{
 							marginRight: '5px'
 						}}

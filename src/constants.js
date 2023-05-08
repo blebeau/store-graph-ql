@@ -38,6 +38,13 @@ query getProducts {
   }
 `;
 
+export const GET_CATEGORIES = gql`
+query getCategories {
+  categories { id
+  title }
+  }
+`;
+
 export const GET_CART = gql`
   query getCart {
     cart {

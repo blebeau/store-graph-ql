@@ -17,7 +17,7 @@ const Navigation = () => {
 		<div style={{ border: '1px solid black', padding: '5px', borderRadius: '8px' }} >
 			{expanded && <div style={navStyles}>
 				<Link to="/" >Home</Link>
-				{/* <Link to="/dashboard" >Dashboard</Link> TODO: design dashboard to add and edit products */}
+				<Link to="/dashboard" >Dashboard</Link>
 				{/* <Link to="/profile" >Profile</Link> TODO: design profile for customer details */}
 				<Link to="/cart" ><FaShoppingCart color='black' /></Link>
 			</div>}
