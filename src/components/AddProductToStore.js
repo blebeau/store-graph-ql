@@ -1,31 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_STORE } from '../constants';
 import { Button } from 'react-bootstrap';
 import ProductCategoriesDropdown from './ProductCategoriesDropdown';
 import UploadAndDisplayImage from '../components/ImageUploader'
+import { faker } from '@faker-js/faker';
 
 const AddProductToStore = () => {
-	const expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-
 	const [addToStore, { loading, error }] = useMutation(ADD_TO_STORE);
 
+	const [base64, setBase64] = useState('');
 	const [productName, setProductName] = useState('')
-	const [productThumbnail, setProductThumbnail] = useState('')
+	const [productPrice, setProductPrice] = useState(0)
 	const [productCategory, setProductCategory] = useState(null)
 
-	const submit = () => addToStore({ vaiables: { productName, productThumbnail, productCategory } })
+	async function getBase64(file) {
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = async function () {
+			setBase64(reader.result)
+		};
+		reader.onerror = function (error) {
+			console.log('Error: ', error);
+		};
+	}
 
-	const setProductCallback = (cat) => setProductCategory(cat)
+	const submit = () => {
+
+		addToStore({
+			vaiables: {
+				id: faker.random.number,
+				productName,
+				base64,
+				productCategory
+			}
+		})
+	}
+
+	const setProductCallback = (cat) => setProductCategory(cat);
+
+	const imageCallback = async (img) => {
+		await getBase64(img)
+	}
 
 	if (loading) return 'Adding Product...';
 	if (error) return `Adding Product Error! ${error.message}`;
 
-	const disabled = productName === '' || !productThumbnail.match(expression) || !productCategory;
-
 	return (
 		<div>
-			<UploadAndDisplayImage />
+			<UploadAndDisplayImage getImage={imageCallback} />
 			<div>
 				<>
 					<span>Product Name</span>
@@ -36,11 +59,12 @@ const AddProductToStore = () => {
 					/>
 				</>
 				<>
-					<span>Product Thumbnail</span>
+					<span>Product Price</span>
 					<input
-						onChange={e => setProductThumbnail(e.target.value)}
-						value={productThumbnail}
-						name='product Thumbnail'
+						type='number'
+						onChange={e => setProductPrice(e.target.value)}
+						value={productPrice}
+						name='Product Price'
 					/>
 				</>
 				<ProductCategoriesDropdown
@@ -49,7 +73,7 @@ const AddProductToStore = () => {
 			</div>
 
 			<Button
-				disabled={disabled}
+				disabled={productName === '' || !productCategory}
 				onClick={e => {
 					e.preventDefault();
 					submit()
