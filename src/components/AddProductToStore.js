@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_STORE } from '../constants';
 import { Button } from 'react-bootstrap';
 import ProductCategoriesDropdown from './ProductCategoriesDropdown';
-import UploadAndDisplayImage from '../components/ImageUploader'
+import ImageUploader from '../components/ImageUploader'
 import { faker } from '@faker-js/faker';
 
 const AddProductToStore = () => {
@@ -25,16 +25,17 @@ const AddProductToStore = () => {
 		};
 	}
 
-	const submit = () => {
+	const submit = e => {
+		const id = Math.floor(Math.random() * 100)
 
 		addToStore({
-			vaiables: {
-				id: faker.random.number,
+			variables: {
+				id,
 				productName,
 				base64,
 				productCategory
 			}
-		})
+		});
 	}
 
 	const setProductCallback = (cat) => setProductCategory(cat);
@@ -48,38 +49,62 @@ const AddProductToStore = () => {
 
 	return (
 		<div>
-			<UploadAndDisplayImage getImage={imageCallback} />
-			<div>
-				<>
+			<ImageUploader getImage={imageCallback} />
+			<br />
+			<div
+				style={{
+					height: '80%'
+				}}
+			>
+				<h2>Product Details</h2>
+				<div
+					style={{
+						padding: '10px',
+					}}
+				>
 					<span>Product Name</span>
+					<br />
 					<input
 						onChange={e => setProductName(e.target.value)}
 						value={productName}
 						name='product name'
 					/>
-				</>
-				<>
+				</div>
+				<div
+					style={{
+						padding: '10px',
+					}}
+				>
 					<span>Product Price</span>
+					<br />
 					<input
 						type='number'
 						onChange={e => setProductPrice(e.target.value)}
 						value={productPrice}
 						name='Product Price'
 					/>
-				</>
+				</div>
 				<ProductCategoriesDropdown
 					setProductCallback={setProductCallback}
 				/>
 			</div>
-
-			<Button
-				disabled={productName === '' || !productCategory}
-				onClick={e => {
-					e.preventDefault();
-					submit()
-				}}>
-				Add Product
-			</Button>
+			<div
+				style={{
+					position: 'absolute',
+					bottom: 0,
+					right: 0,
+					padding: '10px'
+				}}
+			>
+				<Button
+					disabled={productName === '' || !productCategory}
+					onClick={e => {
+						e.preventDefault();
+						submit()
+					}}>
+					Add Product
+				</Button>
+			</div>
 		</div>
 	)
 }

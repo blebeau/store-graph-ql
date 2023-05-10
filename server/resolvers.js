@@ -44,6 +44,8 @@ let cart = {
 	complete: false,
 };
 
+let products = []
+
 const resolvers = {
 	Query: {
 		product: () => mockProduct(),
@@ -55,6 +57,7 @@ const resolvers = {
 	},
 	Mutation: {
 		addToCart: (_, { id }) => {
+			console.log('add to cart id', id)
 			cart = {
 				...cart,
 				total: cart.total + 1,
@@ -107,11 +110,17 @@ const resolvers = {
 			console.log('id, title, thumbnail, price, category',
 				id, title, thumbnail, price, category);
 
-			// cart = {
-			// 	products: [...cart.products, mockProduct(id)],
-			// };
+			const newProd = {
+				id: id,
+				title: title,
+				thumbnail: thumbnail,
+				price: price,
+				category: category
+			}
 
-			// return cart;
+			products = [...products, newProd]
+			console.log('new prod', newProd)
+			return newProd;
 		}
 	},
 };

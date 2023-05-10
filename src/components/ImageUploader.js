@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const UploadAndDisplayImage = ({ getImage }) => {
+const ImageUploader = ({ getImage }) => {
 
 	const [selectedImage, setSelectedImage] = useState(null);
-
+	console.log('selectedImage', selectedImage)
 	return (
-		<div>
+		<div
+			style={{
+				position: 'relative'
+			}}
+		>
 			{selectedImage && (
 				<div>
 					<img
@@ -14,7 +20,10 @@ const UploadAndDisplayImage = ({ getImage }) => {
 						src={URL.createObjectURL(selectedImage)}
 					/>
 					<br />
-					<button onClick={() => setSelectedImage(null)}>Remove</button>
+					<br />
+					<Button
+						variant="danger"
+						onClick={async () => setSelectedImage(null)}>Remove</Button>
 				</div>
 			)}
 
@@ -22,10 +31,12 @@ const UploadAndDisplayImage = ({ getImage }) => {
 			<br />
 
 			<input
+				style={{
+					position: 'absolute',
+					bottom: 0
+				}}
 				type="file"
-				name="myImage"
 				onChange={(event) => {
-					console.log('event.target.files[0]', event.target.files[0]);
 					setSelectedImage(event.target.files[0]);
 					getImage(event.target.files[0])
 				}}
@@ -34,4 +45,4 @@ const UploadAndDisplayImage = ({ getImage }) => {
 	);
 };
 
-export default UploadAndDisplayImage;
+export default ImageUploader;

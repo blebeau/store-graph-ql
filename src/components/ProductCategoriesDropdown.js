@@ -12,10 +12,13 @@ const ProductCategoriesDropdown = ({ setProductCallback }) => {
 	if (error) return `Error Getting Categories! ${error.message}`;
 
 	return (
-		<div>
+		<div
+			style={{
+				padding: '10px',
+			}}
+		>
 			<DropdownButton
-				title="Select Category"
-				value={productCategory?.title || null}
+				title={productCategory?.title || "Select Category"}
 			>
 				{data?.categories && data.categories.map((cat) => (
 					<Dropdown.Item key={cat.id} onClick={() => {
