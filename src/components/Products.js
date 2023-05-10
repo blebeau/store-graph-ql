@@ -30,7 +30,6 @@ const Products = () => {
 	if (error) return `Error! ${error.message}`;
 	if (data.products === null) return 'No Products';
 
-
 	return (
 		<div>
 			{data && data.products.map((product) => (

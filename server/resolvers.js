@@ -57,7 +57,6 @@ const resolvers = {
 	},
 	Mutation: {
 		addToCart: (_, { id }) => {
-			console.log('add to cart id', id)
 			cart = {
 				...cart,
 				total: cart.total + 1,
@@ -107,9 +106,6 @@ const resolvers = {
 			);
 		},
 		addToStore: async (_, { id, title, thumbnail, price, category }) => {
-			console.log('id, title, thumbnail, price, category',
-				id, title, thumbnail, price, category);
-
 			const newProd = {
 				id: id,
 				title: title,
@@ -119,7 +115,7 @@ const resolvers = {
 			}
 
 			products = [...products, newProd]
-			console.log('new prod', newProd)
+
 			return newProd;
 		}
 	},

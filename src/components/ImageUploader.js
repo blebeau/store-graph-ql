@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const ImageUploader = ({ getImage }) => {
 
 	const [selectedImage, setSelectedImage] = useState(null);
-	console.log('selectedImage', selectedImage)
+
 	return (
 		<div
 			style={{
