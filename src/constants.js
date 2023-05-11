@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag';
 
 export const ADD_TO_CART = gql`
 mutation addToCart($productId: Int!) {
@@ -9,23 +9,19 @@ mutation addToCart($productId: Int!) {
 `;
 
 export const ADD_TO_STORE = gql`
-mutation addToStore($productId: Int!,
-  $title: String,
-  $thumbnail: String,
-  $price: Float, 
-  $category: Category) {
+mutation addToStore(
+  $id: Int!,
+  $title: String!,
+  $thumbnail: String!,
+  $price: Float
+  ) {
     addToStore(input: { 
-      productId: $id,
+      id: $id,
       title: $title,
       thumbnail: $thumbnail, 
       price: $price,
-      category: $category,
     }) {
-      productId
       title
-      thumbnail
-      price
-      category
   }
 }
 `;

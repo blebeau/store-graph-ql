@@ -29,13 +29,14 @@ const AddProductToStore = () => {
 	}
 
 	const submit = () => {
+		const id = Math.floor(Math.random() * 100)
 
 		addToStore({
 			variables: {
-				productName,
-				base64,
-				productPrice,
-				productCategory
+				id,
+				title: productName,
+				thumbnail: base64,
+				productPrice
 			}
 		});
 	}
@@ -99,11 +100,8 @@ const AddProductToStore = () => {
 				}}
 			>
 				<Button
-					disabled={productName === '' || !productCategory}
-					onClick={e => {
-						e.preventDefault();
-						submit()
-					}}>
+					disabled={productName === ''}
+					onClick={submit}>
 					Add Product
 				</Button>
 			</div>

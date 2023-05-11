@@ -29,7 +29,7 @@ const typeDefs = gql`
     title: String!
   }
   input ProductInput {
-    productId: Int!
+    id: Int!
     title: String!
     thumbnail: String!
     price: Float

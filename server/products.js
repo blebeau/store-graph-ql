@@ -51,4 +51,47 @@ const initialProd = [
   }
 ]
 
-module.exports = { initialProd }
+const initialCategories = [
+  {
+    id: 51041,
+    title: "Music"
+  },
+  {
+    id: 53380,
+    title: "Jewelery"
+  },
+  {
+    id: 41485,
+    title: "Sports"
+  },
+  {
+    id: 9948,
+    title: "Television"
+  },
+  {
+    id: 51807,
+    title: "Tools"
+  },
+  {
+    id: 41334,
+    title: "Home"
+  },
+  {
+    id: 5355,
+    title: "Games"
+  },
+  {
+    id: 69325,
+    title: "Industrial"
+  },
+  {
+    id: 69107,
+    title: "Outdoors"
+  },
+  {
+    id: 19408,
+    title: "Grocery"
+  }
+]
+
+module.exports = { initialProd, initialCategories }

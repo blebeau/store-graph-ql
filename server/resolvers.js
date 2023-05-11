@@ -3,7 +3,7 @@ const faker = require('faker');
 const JsonWebToken = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
 const _ = require('lodash');
-const { initialProd } = require('./products');
+const { initialProd, initialCategories } = require('./products');
 
 
 const jwtSecret = '34%%##@#FGFKFL';
@@ -60,8 +60,9 @@ const resolvers = {
 		products: () => {
 			return products;
 		},
-		categories: (_, { limit = 10 }) =>
-			Array.from(Array(limit), () => mockCategory()),
+		categories: () => {
+			return initialCategories
+		},
 		cart: () => cart,
 	},
 	Mutation: {
@@ -118,7 +119,7 @@ const resolvers = {
 				'Please provide (valid) authentication details',
 			);
 		},
-		addToStore: async (parent, args) => {
+		addToStore: (parent, args) => {
 			const newProd = args.input
 
 			newProd.id = faker.random.number
