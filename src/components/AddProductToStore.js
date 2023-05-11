@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_TO_STORE } from '../constants';
+import { ADD_TO_STORE, GET_PRODUCTS } from '../constants';
 import { Button } from 'react-bootstrap';
 import ProductCategoriesDropdown from './ProductCategoriesDropdown';
 import ImageUploader from '../components/ImageUploader'
-import { faker } from '@faker-js/faker';
 
 const AddProductToStore = () => {
-	const [addToStore, { loading, error }] = useMutation(ADD_TO_STORE);
+	const [addToStore, { loading, error }] = useMutation(ADD_TO_STORE, {
+		refetchQueries: () => [{
+			query: GET_PRODUCTS,
+		}],
+	});
 
 	const [base64, setBase64] = useState('');
 	const [productName, setProductName] = useState('')
@@ -25,14 +28,13 @@ const AddProductToStore = () => {
 		};
 	}
 
-	const submit = e => {
-		const id = Math.floor(Math.random() * 100)
+	const submit = () => {
 
 		addToStore({
 			variables: {
-				id,
 				productName,
 				base64,
+				productPrice,
 				productCategory
 			}
 		});

@@ -2,6 +2,9 @@ const { AuthenticationError } = require('apollo-server');
 const faker = require('faker');
 const JsonWebToken = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
+const _ = require('lodash');
+const { initialProd } = require('./products');
+
 
 const jwtSecret = '34%%##@#FGFKFL';
 
@@ -46,21 +49,31 @@ let cart = {
 
 let products = []
 
+
+if (products.length === 0) {
+	products = initialProd
+}
+
 const resolvers = {
 	Query: {
 		product: () => mockProduct(),
-		products: (_, { limit = 10 }) =>
-			Array.from(Array(limit), () => mockProduct()),
+		products: () => {
+			return products;
+		},
 		categories: (_, { limit = 10 }) =>
 			Array.from(Array(limit), () => mockCategory()),
 		cart: () => cart,
 	},
 	Mutation: {
-		addToCart: (_, { id }) => {
+		addToCart: (parent, args) => {
+
+			const id = args.input.productId;
+			const product = _.find(products, { id })
+
 			cart = {
 				...cart,
 				total: cart.total + 1,
-				products: [...cart.products, mockProduct(id)],
+				products: [...cart.products, product],
 			};
 
 			return cart;
@@ -105,16 +118,12 @@ const resolvers = {
 				'Please provide (valid) authentication details',
 			);
 		},
-		addToStore: async (_, { id, title, thumbnail, price, category }) => {
-			const newProd = {
-				id: id,
-				title: title,
-				thumbnail: thumbnail,
-				price: price,
-				category: category
-			}
+		addToStore: async (parent, args) => {
+			const newProd = args.input
 
-			products = [...products, newProd]
+			newProd.id = faker.random.number
+
+			products.push(newProd)
 
 			return newProd;
 		}
