@@ -30,7 +30,9 @@ export const GET_PRODUCTS = gql`
 query getProducts {
   products { id
   title
-  thumbnail }
+  thumbnail
+  price
+}
   }
 `;
 

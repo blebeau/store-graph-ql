@@ -4,6 +4,15 @@ import Products from './components/Products';
 import Cart from './components/Cart';
 import Navigation from './components/Navigation';
 import AddProductToStore from './components/AddProductToStore';
+import { API, Auth } from 'aws-amplify'
+import '@aws-amplify/ui-react/styles.css';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import awsconfig from './aws-exports';
+
+const { Amplify } = require("aws-amplify")
+
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
 
 function App() {
 
@@ -19,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);

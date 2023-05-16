@@ -23,3 +23,9 @@
   height: "120px";
   align-items: center;
 }
+
+.nav_image {
+  height: 120px;
+  border-radius: 50%;
+  margin-left: 5px;
+}

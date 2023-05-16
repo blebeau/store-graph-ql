@@ -1,0 +1,12 @@
+.column {
+  float: left;
+  width: 33.33%;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.button_container {
+  display: inline-flex;
+  justify-content: flex-end;
+  left: 0;
+}

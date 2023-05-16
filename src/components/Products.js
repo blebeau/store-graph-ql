@@ -4,17 +4,19 @@ import { GET_PRODUCTS } from '../constants';
 import AddToCartButton from './AddToCartButton'
 import ProductModal from './ProductModal';
 import { Button } from 'react-bootstrap';
+import "../styles/product.css"
 
 
 
 const productStyle = {
 	display: 'flex',
-	height: '100px',
+	height: '150px',
 	justifyContent: 'space-between',
 	border: '1px solid black',
 	borderRadius: '5px',
 	marginBottom: '5px',
-	alignItems: 'center'
+	alignItems: 'center',
+	margin: '5px',
 }
 
 const Products = () => {
@@ -34,23 +36,40 @@ const Products = () => {
 		<div>
 			{data && data.products.map((product) => (
 				<div
-					style={productStyle} key={product.id} value={product.title}>
+					style={productStyle}
+					key={product.id}
+					value={product.title}>
 					<img
-						style={{ height: '50px', marginLeft: '5px' }}
+						className='column'
+						style={{ marginLeft: '5px', width: '100px', justifyContent: "flex-start" }}
 						src={product.thumbnail} alt={product.title}
 					/>
-					<span >{product.title}</span>
-					<AddToCartButton productId={product.id} />
-					<Button
-						variant='outline-primary'
-						style={{
-							marginRight: '5px'
-						}}
-						onClick={() => {
-							setProduct(product)
-							setShowProductModal(true)
-						}}
-					>Details</Button>
+					<div className='column'>
+						<span>
+							<strong>{product.title}</strong>
+						</span>
+						<br />
+						<span>
+							${product.price}
+						</span>
+					</div>
+					<div
+						className='column button_container'
+					>
+						<AddToCartButton productId={product.id} />
+						<Button
+							variant='outline-primary'
+							style={{
+								marginRight: '5px'
+							}}
+							onClick={() => {
+								setProduct(product)
+								setShowProductModal(true)
+							}}>
+							Details
+						</Button>
+					</div>
+
 				</div>
 			))}
 			{showProductModal &&

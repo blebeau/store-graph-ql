@@ -7,15 +7,6 @@ import { useQuery } from '@apollo/client';
 import { GET_CART } from '../constants';
 import '../styles/navigation.css'
 
-const navStyles = {
-	display: 'flex',
-	width: '100%',
-	height: '120px',
-	justifyContent: 'space-between',
-	position: "relative",
-	alignItems: 'center',
-}
-
 const Navigation = () => {
 	const { data } = useQuery(GET_CART);
 	const { signOut } = useAuthenticator()
@@ -24,9 +15,7 @@ const Navigation = () => {
 		<div className='container'>
 			<div className="nav_button_container">
 				<img
-					style={{
-						height: "120px"
-					}}
+					className="nav_image"
 					src={Logo}
 					alt="logo"
 				/>
