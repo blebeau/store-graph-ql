@@ -53,3 +53,16 @@ export const GET_CART = gql`
     }
   }
 `;
+
+export const LOGIN_USER = gql`
+mutation loginUser(
+  $username: String,
+  $password: String
+) {
+  loginUser(username: $username, password: $password)
+  {
+    username,
+    token
+  }
+}
+`;

@@ -94,16 +94,18 @@ const resolvers = {
 				'Please provide (valid) authentication details',
 			);
 		},
-		loginUser: async (_, { userName, password }) => {
+		loginUser: (parent, args) => {
 			let isValid;
+
+			const userName = args.username
+			const password = args.password
 			const user = {
-				userName: 'test',
-				password:
-					'$2b$10$5dwsS5snIRlKu8ka5r7z0eoRyQVAsOtAZHkPJuSx.agOWjchXhSum',
+				userName: userName,
+				password: password
 			};
 
-			if (userName === user.userName) {
-				isValid = await Bcrypt.compareSync(password, user.password);
+			if (args.userName === user.userName) {
+				isValid = Bcrypt.compareSync(password, user.password);
 			}
 
 			if (isValid) {

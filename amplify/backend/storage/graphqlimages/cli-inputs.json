@@ -1,0 +1,14 @@
+{
+  "resourceName": "graphqlimages",
+  "policyUUID": "2854c3d6",
+  "bucketName": "graphqlbucket1",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
