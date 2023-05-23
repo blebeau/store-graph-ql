@@ -12,21 +12,11 @@ const AddProductToStore = () => {
 		}],
 	});
 
-	const [base64, setBase64] = useState('');
+	const [img, setImg] = useState('');
 	const [productName, setProductName] = useState('')
 	const [productPrice, setProductPrice] = useState(0)
 	const [productCategory, setProductCategory] = useState(null)
 
-	async function getBase64(file) {
-		var reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = async function () {
-			setBase64(reader.result)
-		};
-		reader.onerror = function (error) {
-			console.log('Error: ', error);
-		};
-	}
 
 	const submit = () => {
 		const id = Math.floor(Math.random() * 100)
@@ -35,7 +25,7 @@ const AddProductToStore = () => {
 			variables: {
 				id,
 				title: productName,
-				thumbnail: base64,
+				thumbnail: img,
 				productPrice
 			}
 		});
@@ -43,8 +33,8 @@ const AddProductToStore = () => {
 
 	const setProductCallback = (cat) => setProductCategory(cat);
 
-	const imageCallback = async (img) => {
-		await getBase64(img)
+	const imageCallback = (img) => {
+		setImg(img)
 	}
 
 	if (loading) return 'Adding Product...';
