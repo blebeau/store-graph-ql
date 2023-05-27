@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TO_STORE, GET_PRODUCTS } from '../constants';
 import { Button } from 'react-bootstrap';
 import ProductCategoriesDropdown from './ProductCategoriesDropdown';
 import ImageUploader from '../components/ImageUploader'
+import { Auth } from 'aws-amplify'
 
 const AddProductToStore = () => {
 	const [addToStore, { loading, error }] = useMutation(ADD_TO_STORE, {
@@ -12,21 +13,35 @@ const AddProductToStore = () => {
 		}],
 	});
 
+	useEffect(() => {
+		async function loadUser() {
+			const user = await Auth.currentAuthenticatedUser({ bypassCache: true })
+
+			setUserId(user.username)
+		}
+
+		loadUser();
+	}, []);
+
 	const [img, setImg] = useState('');
 	const [productName, setProductName] = useState('')
+	const [description, setDescription] = useState('')
 	const [productPrice, setProductPrice] = useState(0)
+	const [userId, setUserId] = useState(null)
 	const [productCategory, setProductCategory] = useState(null)
-
 
 	const submit = () => {
 		const id = Math.floor(Math.random() * 100)
 
 		addToStore({
 			variables: {
-				id,
+				id: id,
+				category_id: productCategory.id,
 				title: productName,
+				description: description,
 				thumbnail: img,
-				productPrice
+				price: parseFloat(productPrice),
+				userId: userId
 			}
 		});
 	}
@@ -62,6 +77,13 @@ const AddProductToStore = () => {
 						value={productName}
 						name='product name'
 					/>
+					<span>Product description</span>
+					<br />
+					<input
+						onChange={e => setDescription(e.target.value)}
+						value={description}
+						name='product name'
+					/>
 				</div>
 				<div
 					style={{
@@ -72,7 +94,9 @@ const AddProductToStore = () => {
 					<br />
 					<input
 						type='number'
-						onChange={e => setProductPrice(e.target.value)}
+						onChange={e =>
+							setProductPrice(e.target.value)
+						}
 						value={productPrice}
 						name='Product Price'
 					/>
