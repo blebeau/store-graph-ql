@@ -22,8 +22,6 @@ const products = client
   })
   .then((result) => console.log(result));
 
-console.log('products', products)
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ApolloProvider client={client}>

@@ -6,8 +6,6 @@ import ProductModal from './ProductModal';
 import { Button } from 'react-bootstrap';
 import "../styles/product.css"
 
-
-
 const productStyle = {
 	display: 'flex',
 	height: '150px',
