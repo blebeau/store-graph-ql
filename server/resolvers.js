@@ -4,7 +4,13 @@ const JsonWebToken = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
 const _ = require('lodash');
 const { initialProd, initialCategories } = require('./products');
+const sqlite3 = require('sqlite3').verbose();
 
+const db = new sqlite3.Database("./test.db", sqlite3.OPEN_READWRITE, (err) => {
+	if (err) {
+		return console.error(err.message)
+	}
+})
 
 const jwtSecret = '34%%##@#FGFKFL';
 
@@ -24,41 +30,29 @@ const isTokenValid = token => {
 	return false;
 };
 
-const mockCategory = () => ({
-	id: faker.random.number,
-	title: faker.commerce.department,
-});
-
-const mockProduct = (id = false) => ({
-	id: id || faker.random.number,
-	title: faker.commerce.productName,
-	thumbnail: faker.image.imageUrl(
-		400,
-		400,
-		faker.random.arrayElement(['fashion', 'transport', 'technics', 'food']),
-	),
-	price: faker.commerce.price(),
-	category: mockCategory(),
-});
-
 let cart = {
 	total: 0,
 	products: [],
 	complete: false,
 };
 
-let products = []
+let prods = []
+const getProducts = () => db.all("SELECT * FROM products;", function (err, rows) {
+	if (err) {
+		console.log('err', err)
+	}
 
+	rows.forEach((row) => prods.push(row))
 
-if (products.length === 0) {
-	products = initialProd
-}
+})
+
+let sql = ''
+const products = getProducts() || []
 
 const resolvers = {
 	Query: {
-		product: () => mockProduct(),
 		products: () => {
-			return products;
+			return prods;
 		},
 		categories: () => {
 			return initialCategories
@@ -124,9 +118,24 @@ const resolvers = {
 		addToStore: (parent, args) => {
 			const newProd = args.input
 
-			newProd.id = faker.random.number
-
 			products.push(newProd)
+
+			sql = `INSERT INTO products(
+				category_id,
+				title,
+				description,
+				thumbnail,
+				price,
+				user_id) VALUES (?,?,?,?,?,?)`;
+
+			db.run(sql, [newProd.category_id, newProd.title, newProd.description, newProd.thumbnail, newProd.price, newProd.user_id], (err) => {
+				if (err) {
+					return console.error(err.message)
+				}
+				const cursor = db.cursor()
+
+				newProd.id = cursor.lastrowid
+			})
 
 			return newProd;
 		}

@@ -8,7 +8,7 @@ const typeDefs = gql`
     description: String!,
     thumbnail: String!,
     price: Float,
-    user_id: Int!
+    user_id: String!
   }
   type Category {
     id: Int!
@@ -31,11 +31,13 @@ const typeDefs = gql`
     title: String!
   }
   input ProductInput {
-    id: Int!
-    title: String!
-    thumbnail: String!
-    price: Float
-    category: CategoryInput
+    id: Int!,
+    category_id: Int,
+    title: String!,
+    description: String!,
+    thumbnail: String!,
+    price: Float,
+    user_id: String!
   }
   type Query {
     product: Product

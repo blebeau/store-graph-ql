@@ -16,7 +16,7 @@ mutation addToStore(
   $description: String!,
   $thumbnail: String!,
   $price: Float,
-  $user_id: Int!
+  $user_id: String!
   ) {
     addToStore(input: { 
       id: $id,

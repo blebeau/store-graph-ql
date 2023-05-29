@@ -41,7 +41,7 @@ const AddProductToStore = () => {
 				description: description,
 				thumbnail: img,
 				price: parseFloat(productPrice),
-				userId: userId
+				user_id: userId
 			}
 		});
 	}
