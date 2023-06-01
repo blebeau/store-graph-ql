@@ -49,7 +49,7 @@ const ImageUploader = ({ getImage }) => {
 				<div>
 					<img
 						alt="not found"
-						width={"250px"}
+						width={"80%"}
 						src={selectedImage}
 					/>
 					<br />
@@ -59,12 +59,13 @@ const ImageUploader = ({ getImage }) => {
 						onClick={async () => setSelectedImage(null)}>Remove</Button>
 				</div>
 			)}
-			<div
+			{!selectedImage && <div
 				style={{
 					border: '1px solid black',
 					height: '250px',
 					textAlign: 'center',
-					padding: '18%'
+					width: '80%',
+					marginLeft: '15%'
 				}}
 				{...getRootProps()}>
 				<input {...getInputProps()} />
@@ -74,6 +75,7 @@ const ImageUploader = ({ getImage }) => {
 						<p>Drag 'n' drop some files here, or click to select files</p>
 				}
 			</div>
+			}
 		</div>
 	);
 };

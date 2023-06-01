@@ -56,22 +56,37 @@ const AddProductToStore = () => {
 	if (error) return `Adding Product Error! ${error.message}`;
 
 	return (
-		<div>
+		<div className='row'>
 			<h2 style={{ textAlign: 'center' }}>Product Details</h2>
-			<ImageUploader getImage={imageCallback} />
-			<br />
 			<div
 				style={{
-					height: '80%'
+					float: 'left',
+					width: '50%'
+				}}
+			>
+
+				<ImageUploader getImage={imageCallback} />
+			</div>
+			<div
+				style={{
+					height: '80%',
+					width: '40%',
+					marginLeft: '10%'
 				}}
 			>
 				<div
 					style={{
 						padding: '10px',
+						alignItems: 'center',
+						display: 'flex'
 					}}
 				>
-					<span>Product Name</span>
-					<br />
+					<span style={{
+						paddingRight: '10px',
+						width: '120px'
+					}}
+					>Product Name</span>
+
 					<input
 						onChange={e => setProductName(e.target.value)}
 						value={productName}
@@ -81,11 +96,18 @@ const AddProductToStore = () => {
 				<div
 					style={{
 						padding: '10px',
+						alignItems: 'center',
+						display: 'flex'
 					}}
 				>
-					<span>Product description</span>
-					<br />
-					<input
+					<span
+						style={{
+							paddingRight: '10px',
+							width: '120px'
+						}}
+					>Product description</span>
+
+					<textarea
 						onChange={e => setDescription(e.target.value)}
 						value={description}
 						name='product name'
@@ -94,10 +116,17 @@ const AddProductToStore = () => {
 				<div
 					style={{
 						padding: '10px',
+						alignItems: 'center',
+						display: 'flex'
 					}}
 				>
-					<span>Product Price</span>
-					<br />
+					<span
+						style={{
+							paddingRight: '10px',
+							width: '120px'
+						}}
+					>Product Price</span>
+
 					<input
 						type='number'
 						onChange={e =>
