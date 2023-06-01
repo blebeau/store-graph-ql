@@ -8,13 +8,11 @@ import "../styles/product.css"
 
 const productStyle = {
 	display: 'flex',
-	height: '150px',
 	justifyContent: 'space-between',
 	border: '1px solid black',
 	borderRadius: '5px',
 	marginBottom: '5px',
-	alignItems: 'center',
-	margin: '5px',
+	minWidth: '400px'
 }
 
 const Products = () => {
@@ -39,23 +37,24 @@ const Products = () => {
 					value={product.title}>
 					<img
 						className='column'
-						style={{ marginLeft: '5px', width: '100px', justifyContent: "flex-start" }}
+						style={{ width: '100px' }}
 						src={product.thumbnail} alt={product.title}
 					/>
-					<div className='column'>
-						<span>
-							<strong>{product.title}</strong>
+					<div className='column_description'>
+						<span className='title'>
+							<strong>{product.title}</strong> {'  '}
+							${product.price > 0 ? product.price : ''}
 						</span>
-						<br />
-						<span>
-							${product.price}
+						<span className='description'>
+							{product.description}
 						</span>
 					</div>
 					<div
 						className='column button_container'
 					>
-						<AddToCartButton productId={product.id} />
+						<AddToCartButton className='button' productId={product.id} />
 						<Button
+							className='button'
 							variant='outline-primary'
 							style={{
 								marginRight: '5px'

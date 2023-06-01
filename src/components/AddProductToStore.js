@@ -57,6 +57,7 @@ const AddProductToStore = () => {
 
 	return (
 		<div>
+			<h2 style={{ textAlign: 'center' }}>Product Details</h2>
 			<ImageUploader getImage={imageCallback} />
 			<br />
 			<div
@@ -64,7 +65,6 @@ const AddProductToStore = () => {
 					height: '80%'
 				}}
 			>
-				<h2>Product Details</h2>
 				<div
 					style={{
 						padding: '10px',
@@ -77,6 +77,12 @@ const AddProductToStore = () => {
 						value={productName}
 						name='product name'
 					/>
+				</div>
+				<div
+					style={{
+						padding: '10px',
+					}}
+				>
 					<span>Product description</span>
 					<br />
 					<input

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import '../styles/ProductModal.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -41,11 +42,17 @@ const ProductModal = ({ product, show, modalCloseCallback }) => {
 			<Modal.Header closeButton>
 				<Modal.Title>{product.title}</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>
-				<img
-					style={{ height: '50px', marginLeft: '5px' }}
-					src={product.thumbnail} alt={product.title}
-				/>
+			<Modal.Body className='modal_body'>
+				<div style={{ height: '50%' }} >
+					<img
+						className='img'
+						src={product.thumbnail} alt={product.title}
+					/>
+				</div>
+
+				<div className='modal_description' >
+					{product.description}
+				</div>
 			</Modal.Body>
 			<Modal.Footer
 			>

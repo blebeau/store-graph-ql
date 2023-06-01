@@ -1,12 +1,32 @@
 .column {
   float: left;
-  width: 33.33%;
+  word-wrap: break-word;
+  overflow: hidden;
+  margin: 20px;
+}
+
+.column_description {
+  width: 40%;
   word-wrap: break-word;
   overflow: hidden;
 }
 
 .button_container {
-  display: inline-flex;
   justify-content: flex-end;
-  left: 0;
+  width: 25%;
+}
+
+.button {
+  width: 115px;
+}
+
+.title {
+  height: 20%;
+  display: block;
+  text-align: center;
+}
+
+.description {
+  height: 80%;
+  display: block;
 }
