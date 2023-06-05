@@ -4,10 +4,14 @@ import Products from './components/Products';
 import Cart from './components/Cart';
 import Navigation from './components/Navigation';
 import AddProductToStore from './components/AddProductToStore';
-import { API, Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 import '@aws-amplify/ui-react/styles.css';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import awsconfig from './aws-exports';
+
+Auth.currentSession()
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
 
 const { Amplify } = require("aws-amplify")
 

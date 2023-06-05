@@ -1,9 +1,8 @@
 const { AuthenticationError } = require('apollo-server');
-const faker = require('faker');
 const JsonWebToken = require('jsonwebtoken');
 const Bcrypt = require('bcryptjs');
 const _ = require('lodash');
-const { initialProd, initialCategories } = require('./products');
+const { initialCategories } = require('./products');
 const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database("./test.db", sqlite3.OPEN_READWRITE, (err) => {
@@ -58,6 +57,12 @@ const resolvers = {
 			return initialCategories
 		},
 		cart: () => cart,
+		userProducts: (parent, args) => {
+			const userId = args.id
+			const userProducts = prods.filter((prod) => prod.user_id === userId)
+
+			return userProducts
+		}
 	},
 	Mutation: {
 		addToCart: (parent, args) => {
@@ -117,8 +122,7 @@ const resolvers = {
 		},
 		addToStore: (parent, args) => {
 			const newProd = args.input
-
-			products.push(newProd)
+			prods.push(newProd)
 
 			sql = `INSERT INTO products(
 				category_id,
@@ -132,9 +136,7 @@ const resolvers = {
 				if (err) {
 					return console.error(err.message)
 				}
-				const cursor = db.cursor()
 
-				newProd.id = cursor.lastrowid
 			})
 
 			return newProd;

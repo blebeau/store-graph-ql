@@ -4,6 +4,7 @@ import { ADD_TO_STORE, GET_PRODUCTS } from '../constants';
 import { Button } from 'react-bootstrap';
 import ProductCategoriesDropdown from './ProductCategoriesDropdown';
 import ImageUploader from '../components/ImageUploader'
+import UserProducts from '../components/UserProducts'
 import { Auth } from 'aws-amplify'
 
 const AddProductToStore = () => {
@@ -142,10 +143,10 @@ const AddProductToStore = () => {
 			</div>
 			<div
 				style={{
-					position: 'absolute',
-					bottom: 0,
-					right: 0,
-					padding: '10px'
+					float: 'right',
+					padding: '10px',
+					display: 'flex',
+					justifyContent: 'flex-end'
 				}}
 			>
 				<Button
@@ -154,6 +155,7 @@ const AddProductToStore = () => {
 					Add Product
 				</Button>
 			</div>
+			<UserProducts userId={userId} />
 		</div>
 	)
 }

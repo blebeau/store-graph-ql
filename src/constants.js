@@ -36,6 +36,7 @@ export const GET_PRODUCTS = gql`
 query getProducts {
   products { id
   title
+  description
   thumbnail
   price
   user_id
@@ -45,11 +46,13 @@ query getProducts {
 `;
 
 export const GET_USER_PRODUCTS = gql`
-query getProducts($user_id: String) {
-  products { id
+query userProducts($id: String) {
+  userProducts(id: $id) { id
   title
+  description
   thumbnail
   price
+  user_id
 }
   }
 `;
