@@ -8,17 +8,17 @@ mutation addToCart($productId: Int!) {
 }
 `;
 
-export const ADD_TO_STORE = gql`
-mutation addToStore(
+export const ADD_PRODUCT = gql`
+mutation addProduct(
   $id: Int!,
   $category_id: Int,
   $title: String!,
   $description: String!,
   $thumbnail: String!,
-  $price: Float,
-  $user_id: String!
+  $user_id: String!,
+  $price: Float
   ) {
-    addToStore(input: { 
+    addProduct(input: { 
       id: $id,
       category_id: $category_id,
       title: $title,
@@ -33,8 +33,8 @@ mutation addToStore(
 `;
 
 export const GET_PRODUCTS = gql`
-query getProducts {
-  products { id
+query allProducts($limit: Int, nextToken: String) {
+  allProducts($limit: $limit, nextToken: $nextToken) { id
   title
   description
   thumbnail
@@ -46,8 +46,8 @@ query getProducts {
 `;
 
 export const GET_USER_PRODUCTS = gql`
-query userProducts($id: String) {
-  userProducts(id: $id) { id
+query allUserProducts($id: String, $limit: Int, $nextToken: String) {
+  allUserProducts(id: $id, limit: $limit, nextToken: $nextToken) { id
   title
   description
   thumbnail
